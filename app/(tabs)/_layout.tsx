@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {useRouter} from 'expo-router';
 import {useAuth} from '@/hooks/useAuth';
-import {colors, spacing, fontSize, borderRadius} from '@/config/theme';
+import {colors, spacing, fontSize, borderRadius} from '@/styles/theme';
 import {Ionicons} from '@expo/vector-icons';
 
 export default function ProfileScreen() {

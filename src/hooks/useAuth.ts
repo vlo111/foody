@@ -1,6 +1,18 @@
 import { useState } from 'react';
-import {useAuthStore, User} from '@store/authStore';
-import { authService, LoginCredentials, RegisterData } from '@services/authService';
+import { useAuthStore, User } from '@/store/authStore';
+
+export interface LoginCredentials {
+  email: string;
+  password: string;
+}
+
+export interface RegisterData {
+  email: string;
+  password: string;
+  name: string;
+  phone: string;
+  role: 'customer' | 'driver';
+}
 
 export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -8,28 +20,21 @@ export const useAuth = () => {
 
   const { user, isAuthenticated, login: setLogin, logout: setLogout } = useAuthStore();
 
-  /**
-   * Login user
-   */
   const login = async (credentials: LoginCredentials) => {
     setIsLoading(true);
     setError(null);
-    const fakeUser: User = {
-      id: '123',
-      email: 'demo@example@aa.com',
-      name: 'Foody User',
-      role: 'customer',
-      phone: '+37498554656',
-      avatar: '/assets/image/user.png'
-    };
-
-    const token = "test_token";
 
     try {
-      // const response = await authService.login(credentials);
-      //* TODO: should be - response.user, response.token  *//
-      setLogin(fakeUser, token);
-      return { success: true, user: fakeUser };
+      // Mock successful login (replace with real API call)
+      const mockUser: User = {
+        id: '1',
+        email: credentials.email,
+        name: 'Test User',
+        role: 'customer',
+      };
+
+      setLogin(mockUser, 'mock-token');
+      return { success: true, user: mockUser };
     } catch (err: any) {
       const errorMessage = err.message || 'Login failed';
       setError(errorMessage);
@@ -39,17 +44,22 @@ export const useAuth = () => {
     }
   };
 
-  /**
-   * Register new user
-   */
   const register = async (data: RegisterData) => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const response = await authService.register(data);
-      setLogin(response.user, response.token);
-      return { success: true, user: response.user };
+      // Mock successful registration (replace with real API call)
+      const mockUser: User = {
+        id: '1',
+        email: data.email,
+        name: data.name,
+        role: data.role,
+        phone: data.phone,
+      };
+
+      setLogin(mockUser, 'mock-token');
+      return { success: true, user: mockUser };
     } catch (err: any) {
       const errorMessage = err.message || 'Registration failed';
       setError(errorMessage);
@@ -59,19 +69,14 @@ export const useAuth = () => {
     }
   };
 
-  /**
-   * Logout user
-   */
   const logout = async () => {
     setIsLoading(true);
     setError(null);
 
     try {
-      await authService.logout();
       setLogout();
       return { success: true };
     } catch (err: any) {
-      // Even if API call fails, logout locally
       setLogout();
       return { success: true };
     } finally {
