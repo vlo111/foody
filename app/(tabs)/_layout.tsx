@@ -7,7 +7,7 @@ import {
     Alert,
 } from 'react-native';
 import {useRouter} from 'expo-router';
-import {useAuth} from '@/hooks/useAuth';
+import {useAuth} from '@hooks/auth/useAuth';
 import {colors, spacing, fontSize, borderRadius} from '@/styles/theme';
 import {Ionicons} from '@expo/vector-icons';
 

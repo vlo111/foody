@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@hooks/auth/useAuth';
 import { sharedStyles } from '@/styles/shared';
 import { colors } from '@/styles/theme';
 import { ROUTES } from '@/constants/routes';

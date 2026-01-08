@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuthStore, User } from '@/store/authStore';
+import { useAuthStore, User } from '@store/authStore';
 
 export interface LoginCredentials {
   email: string;
@@ -25,7 +25,6 @@ export const useAuth = () => {
     setError(null);
 
     try {
-      // Mock successful login (replace with real API call)
       const mockUser: User = {
         id: '1',
         email: credentials.email,
