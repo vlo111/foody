@@ -21,7 +21,7 @@ export default function LoginScreen() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({ email: '', password: '' });
-  
+
   const { login, isLoading } = useAuth();
   const router = useRouter();
 
@@ -75,7 +75,7 @@ export default function LoginScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
     >
-      <ScrollView 
+      <ScrollView
         contentContainerStyle={styles.scrollContent}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
@@ -94,10 +94,10 @@ export default function LoginScreen() {
             <View style={styles.inputContainer}>
               <Text style={styles.label}>Email</Text>
               <View style={[styles.inputWrapper, errors.email && styles.inputError]}>
-                <Ionicons 
-                  name="mail-outline" 
-                  size={20} 
-                  color={colors.gray400} 
+                <Ionicons
+                  name="mail-outline"
+                  size={20}
+                  color={colors.gray400}
                   style={styles.inputIcon}
                 />
                 <TextInput
@@ -124,10 +124,10 @@ export default function LoginScreen() {
             <View style={styles.inputContainer}>
               <Text style={styles.label}>Password</Text>
               <View style={[styles.inputWrapper, errors.password && styles.inputError]}>
-                <Ionicons 
-                  name="lock-closed-outline" 
-                  size={20} 
-                  color={colors.gray400} 
+                <Ionicons
+                  name="lock-closed-outline"
+                  size={20}
+                  color={colors.gray400}
                   style={styles.inputIcon}
                 />
                 <TextInput
@@ -143,14 +143,14 @@ export default function LoginScreen() {
                   autoComplete="password"
                   editable={!isLoading}
                 />
-                <TouchableOpacity 
+                <TouchableOpacity
                   onPress={() => setShowPassword(!showPassword)}
                   style={styles.eyeIcon}
                 >
-                  <Ionicons 
-                    name={showPassword ? "eye-outline" : "eye-off-outline"} 
-                    size={20} 
-                    color={colors.gray400} 
+                  <Ionicons
+                    name={showPassword ? "eye-outline" : "eye-off-outline"}
+                    size={20}
+                    color={colors.gray400}
                   />
                 </TouchableOpacity>
               </View>
@@ -160,7 +160,7 @@ export default function LoginScreen() {
             </View>
 
             {/* Forgot Password */}
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.forgotPassword}
               disabled={isLoading}
             >
