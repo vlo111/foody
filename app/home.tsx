@@ -31,7 +31,7 @@ export default function HomeScreen() {
   return (
     <View style={sharedStyles.centerContainer}>
       <Text style={sharedStyles.title}>Welcome, {user?.name}!</Text>
-      <Text style={sharedStyles.subtitle}>You're logged in</Text>
+      <Text style={sharedStyles.subtitle}>You're logged in </Text>
 
       <TouchableOpacity
         style={sharedStyles.buttonDanger}
