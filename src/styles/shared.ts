@@ -1,77 +1,87 @@
-import { StyleSheet } from 'react-native';
-import { colors, spacing, fontSize, fontWeight, borderRadius } from './theme';
-
-/**
- * Shared Styles
- * Reusable styles to eliminate duplication across screens
- */
+import { StyleSheet } from "react-native";
+import {
+  colors,
+  spacing,
+  fontSize,
+  fontWeight,
+  borderRadius,
+  shadows,
+} from "./theme";
 
 export const sharedStyles = StyleSheet.create({
-  // === Containers ===
   container: {
     flex: 1,
-    justifyContent: 'center',
-    padding: spacing.lg,
-    backgroundColor: colors.backgroundSecondary,
+    backgroundColor: colors.background,
   },
 
-  scrollContainer: {
-    flexGrow: 1,
-    justifyContent: 'center',
+  safeContainer: {
+    flex: 1,
+    backgroundColor: colors.background,
     padding: spacing.lg,
-    backgroundColor: colors.backgroundSecondary,
   },
 
   centerContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: spacing.lg,
-    backgroundColor: colors.backgroundSecondary,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.background,
   },
 
-  // === Typography ===
-  title: {
-    fontSize: fontSize['3xl'],
-    fontWeight: fontWeight.bold,
-    color: colors.text,
-    textAlign: 'center',
-    marginBottom: spacing.xl,
+  scrollContainer: {
+    flexGrow: 1,
+    paddingVertical: spacing.lg,
   },
 
-  subtitle: {
-    fontSize: fontSize.lg,
-    color: colors.textSecondary,
-    marginBottom: spacing.xs,
-  },
-
-  // === Form Elements ===
-  input: {
+  card: {
     backgroundColor: colors.white,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: borderRadius.md,
-    padding: spacing.md,
-    fontSize: fontSize.base,
-    color: colors.text,
+    borderRadius: borderRadius.lg,
+    padding: spacing.lg,
+    marginBottom: spacing.md,
+    ...shadows.md,
+  },
+
+  cardHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: spacing.md,
   },
 
-  inputError: {
-    borderColor: colors.error,
+  heading1: {
+    fontSize: fontSize["4xl"],
+    fontWeight: fontWeight.bold,
+    color: colors.text,
   },
 
-  // === Buttons ===
+  heading2: {
+    fontSize: fontSize["3xl"],
+    fontWeight: fontWeight.bold,
+    color: colors.text,
+  },
+
+  heading3: {
+    fontSize: fontSize["2xl"],
+    fontWeight: fontWeight.semibold,
+    color: colors.text,
+  },
+
+  bodyText: {
+    fontSize: fontSize.base,
+    color: colors.text,
+    lineHeight: fontSize.base * 1.5,
+  },
+
+  caption: {
+    fontSize: fontSize.sm,
+    color: colors.textSecondary,
+  },
+
   button: {
     backgroundColor: colors.primary,
     borderRadius: borderRadius.md,
     padding: spacing.md,
-    alignItems: 'center',
-    marginTop: spacing.md,
-  },
-
-  buttonDisabled: {
-    opacity: 0.6,
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   buttonText: {
@@ -80,10 +90,70 @@ export const sharedStyles = StyleSheet.create({
     fontWeight: fontWeight.semibold,
   },
 
-  buttonDanger: {
-    backgroundColor: colors.error,
-    paddingHorizontal: spacing.xl,
-    paddingVertical: spacing.md,
+  buttonOutline: {
+    backgroundColor: "transparent",
+    borderWidth: 1,
+    borderColor: colors.primary,
     borderRadius: borderRadius.md,
+    padding: spacing.md,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  buttonOutlineText: {
+    color: colors.primary,
+    fontSize: fontSize.base,
+    fontWeight: fontWeight.semibold,
+  },
+
+  listItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: spacing.md,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
+  },
+
+  listItemText: {
+    flex: 1,
+    fontSize: fontSize.base,
+    color: colors.text,
+  },
+
+  divider: {
+    height: 1,
+    backgroundColor: colors.border,
+    marginVertical: spacing.md,
+  },
+
+  loading: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.background,
+  },
+
+  error: {
+    padding: spacing.md,
+    backgroundColor: colors.error + "20",
+    borderRadius: borderRadius.md,
+    marginBottom: spacing.md,
+  },
+
+  errorText: {
+    color: colors.error,
+    fontSize: fontSize.sm,
+  },
+
+  success: {
+    padding: spacing.md,
+    backgroundColor: colors.success + "20",
+    borderRadius: borderRadius.md,
+    marginBottom: spacing.md,
+  },
+
+  successText: {
+    color: colors.success,
+    fontSize: fontSize.sm,
   },
 });

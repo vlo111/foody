@@ -1,78 +1,95 @@
-import React, { useState } from 'react';
+import React from "react";
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
-  ActivityIndicator,
   Alert,
-} from 'react-native';
-import { useRouter } from 'expo-router';
-import { useAuth } from '@hooks/auth/useAuth';
-import { sharedStyles } from '@/styles/shared';
-import { colors } from '@/styles/theme';
-import { ROUTES } from '@/constants/routes';
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
+import { authLayoutStyles } from "@/styles/auth/layout.styles";
+import { linkStyles } from "@/styles/auth/components.styles";
+import { authScreenStyles } from "@/styles/auth/screen.styles";
+import { FormInput } from "@/components/auth/FormInput";
+import { PasswordInput } from "@/components/auth/PasswordInput";
+import { Button } from "@/components/auth/Button";
+import { SocialButton } from "@/components/auth/SocialButton";
+import { Divider } from "@/components/auth/Divider";
+import { useLoginForm } from "@/hooks/forms/useLoginForm";
+
+const SOCIAL_PROVIDERS = ["facebook", "google"] as const;
 
 export default function LoginScreen() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const { login, isLoading } = useAuth();
-  const router = useRouter();
+  const {
+    formData,
+    errors,
+    touched,
+    isLoading,
+    updateField,
+    markFieldTouched,
+    handleSubmit,
+  } = useLoginForm();
 
-  const handleLogin = async () => {
-    if (!email || !password) {
-      Alert.alert('Error', 'Please fill in all fields');
-      return;
-    }
+  const handleForgotPassword = () => {
+    Alert.alert("Forgot Password", "Wait, it still does not work");
+  };
 
-    const result = await login({ email: email.trim(), password });
-
-    if (result.success) {
-      router.replace(ROUTES.HOME);
-    } else {
-      Alert.alert('Login Failed', result.error || 'Please try again');
-    }
+  const handleSocialLogin = (provider: string) => {
+    Alert.alert(`${provider} Login`, "Social login coming soon");
   };
 
   return (
-    <View style={sharedStyles.container}>
-      <Text style={sharedStyles.title}>Welcome Back</Text>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+    >
+      <View style={authLayoutStyles.formContainer}>
+        <FormInput
+          placeholder="Email"
+          value={formData.email}
+          onChangeText={(value) => updateField("email", value)}
+          onBlur={() => markFieldTouched("email")}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          editable={!isLoading}
+          error={touched.email ? errors.email : undefined}
+        />
 
-      <TextInput
-        style={sharedStyles.input}
-        placeholder="Email"
-        placeholderTextColor={colors.gray400}
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-        keyboardType="email-address"
-        editable={!isLoading}
-      />
+        <PasswordInput
+          placeholder="Password"
+          value={formData.password}
+          onChangeText={(value) => updateField("password", value)}
+          onBlur={() => markFieldTouched("password")}
+          editable={!isLoading}
+          error={touched.password ? errors.password : undefined}
+        />
 
-      <TextInput
-        style={sharedStyles.input}
-        placeholder="Password"
-        placeholderTextColor={colors.gray400}
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        editable={!isLoading}
-      />
+        <TouchableOpacity
+          style={linkStyles.container}
+          onPress={handleForgotPassword}
+        >
+          <Text style={linkStyles.text}>Forgot password?</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={[
-          sharedStyles.button,
-          isLoading && sharedStyles.buttonDisabled
-        ]}
-        onPress={handleLogin}
-        disabled={isLoading}
-      >
-        {isLoading ? (
-          <ActivityIndicator color={colors.white} />
-        ) : (
-          <Text style={sharedStyles.buttonText}>Sign In</Text>
-        )}
-      </TouchableOpacity>
-    </View>
+        <View style={authScreenStyles.spacerMD} />
+
+        <Button
+          title="Sign In"
+          onPress={handleSubmit}
+          loading={isLoading}
+          disabled={isLoading}
+        />
+
+        <Divider />
+
+        {SOCIAL_PROVIDERS.map((provider) => (
+          <SocialButton
+            key={provider}
+            provider={provider}
+            onPress={() => handleSocialLogin(provider)}
+          />
+        ))}
+      </View>
+    </KeyboardAvoidingView>
   );
 }

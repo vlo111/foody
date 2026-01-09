@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { useAuthStore, User } from '@store/authStore';
+import { useState } from "react";
+import { useAuthStore, User } from "@store/authStore";
+import { loginAPI, registerAPI, logoutAPI } from "@/services/api/authService";
 
 export interface LoginCredentials {
   email: string;
@@ -11,31 +12,41 @@ export interface RegisterData {
   password: string;
   name: string;
   phone: string;
-  role: 'customer' | 'driver';
+  role: "customer" | "driver";
 }
 
 export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const { user, isAuthenticated, login: setLogin, logout: setLogout } = useAuthStore();
+  const {
+    user,
+    token,
+    isAuthenticated,
+    login: setLogin,
+    logout: setLogout,
+  } = useAuthStore();
 
   const login = async (credentials: LoginCredentials) => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const mockUser: User = {
-        id: '1',
-        email: credentials.email,
-        name: 'Test User',
-        role: 'customer',
-      };
+      const response = await loginAPI(credentials.email, credentials.password);
 
-      setLogin(mockUser, 'mock-token');
-      return { success: true, user: mockUser };
+      if (!response.success || !response.data) {
+        throw new Error(response.error || "Login failed");
+      }
+
+      setLogin(response.data.user, response.data.token);
+
+      return {
+        success: true,
+        user: response.data.user,
+        token: response.data.token,
+      };
     } catch (err: any) {
-      const errorMessage = err.message || 'Login failed';
+      const errorMessage = err.message || "Login failed";
       setError(errorMessage);
       return { success: false, error: errorMessage };
     } finally {
@@ -48,19 +59,27 @@ export const useAuth = () => {
     setError(null);
 
     try {
-      // Mock successful registration (replace with real API call)
-      const mockUser: User = {
-        id: '1',
-        email: data.email,
-        name: data.name,
-        role: data.role,
-        phone: data.phone,
-      };
+      const response = await registerAPI(
+        data.name,
+        data.email,
+        data.phone,
+        data.password,
+        data.role,
+      );
 
-      setLogin(mockUser, 'mock-token');
-      return { success: true, user: mockUser };
+      if (!response.success || !response.data) {
+        throw new Error(response.error || "Registration failed");
+      }
+
+      setLogin(response.data.user, response.data.token);
+
+      return {
+        success: true,
+        user: response.data.user,
+        token: response.data.token,
+      };
     } catch (err: any) {
-      const errorMessage = err.message || 'Registration failed';
+      const errorMessage = err.message || "Registration failed";
       setError(errorMessage);
       return { success: false, error: errorMessage };
     } finally {
@@ -73,6 +92,9 @@ export const useAuth = () => {
     setError(null);
 
     try {
+      if (token) {
+        await logoutAPI(token);
+      }
       setLogout();
       return { success: true };
     } catch (err: any) {
@@ -85,11 +107,13 @@ export const useAuth = () => {
 
   return {
     user,
+    token,
     isAuthenticated,
     isLoading,
     error,
     login,
     register,
     logout,
+    clearError: () => setError(null),
   };
 };
