@@ -1,23 +1,25 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { Slot, useRouter, useSegments } from "expo-router";
 import { authLayoutStyles } from "@/styles/auth/layout.styles";
-import { Image, StyleSheet } from 'react-native';
-
-const TABS = [
-  { name: "login", label: "Login", route: "/(auth)/login" },
-  { name: "register", label: "Sign Up", route: "/(auth)/register" },
-] as const;
+import { useLocale } from "@/contexts/LocaleContext";
+import { LanguageSelector } from "@components/LanguageSelector";
 
 export default function AuthLayout() {
   const router = useRouter();
   const segments = useSegments();
+  const { t } = useLocale();
   const currentTab = segments[segments.length - 1] || "login";
+
+  const TABS = [
+    { name: "login", label: t("auth.login"), route: "/(auth)/login" },
+    { name: "register", label: t("auth.signUp"), route: "/(auth)/register" },
+  ] as const;
 
   const styles = StyleSheet.create({
     image: {
-      width: 70,
-      height: 70,
+      width: 60,
+      height: 60,
     },
   });
 
@@ -36,7 +38,7 @@ export default function AuthLayout() {
           >
             <Image
               style={styles.image}
-              source={require('assets/icons/foodyiconimage.png')}
+              source={require("assets/icons/foodyiconimage.png")}
             />
           </View>
         </View>
@@ -60,12 +62,14 @@ export default function AuthLayout() {
           <View
             style={[
               authLayoutStyles.tabIndicator,
-              currentTab === "register" && authLayoutStyles.tabIndicatorRight
+              currentTab === "register" && authLayoutStyles.tabIndicatorRight,
             ]}
           />
         </View>
       </View>
-
+      <View>
+        <LanguageSelector />
+      </View>
       <View style={authLayoutStyles.content}>
         <Slot />
       </View>

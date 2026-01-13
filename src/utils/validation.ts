@@ -1,3 +1,5 @@
+import i18n from "@/i18n/config";
+
 export interface ValidationResult {
   isValid: boolean;
   error?: string;
@@ -20,11 +22,11 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const validateEmail = (email: string): ValidationResult => {
   if (!email.trim()) {
-    return { isValid: false, error: "Email is required" };
+    return { isValid: false, error: i18n.t("validation.emailRequired") };
   }
 
   if (!EMAIL_REGEX.test(email)) {
-    return { isValid: false, error: "Invalid email format" };
+    return { isValid: false, error: i18n.t("validation.emailInvalid") };
   }
 
   return { isValid: true };
@@ -32,11 +34,11 @@ export const validateEmail = (email: string): ValidationResult => {
 
 export const validatePassword = (password: string): ValidationResult => {
   if (!password) {
-    return { isValid: false, error: "Password is required" };
+    return { isValid: false, error: i18n.t("validation.passwordRequired") };
   }
 
   if (password.length < 6) {
-    return { isValid: false, error: "Password must be at least 6 characters" };
+    return { isValid: false, error: i18n.t("validation.passwordMinLength") };
   }
 
   return { isValid: true };
@@ -44,11 +46,11 @@ export const validatePassword = (password: string): ValidationResult => {
 
 export const validateName = (name: string): ValidationResult => {
   if (!name.trim()) {
-    return { isValid: false, error: "Name is required" };
+    return { isValid: false, error: i18n.t("validation.nameRequired") };
   }
 
   if (name.trim().length < 2) {
-    return { isValid: false, error: "Name must be at least 2 characters" };
+    return { isValid: false, error: i18n.t("validation.nameMinLength") };
   }
 
   return { isValid: true };
@@ -56,13 +58,13 @@ export const validateName = (name: string): ValidationResult => {
 
 export const validatePhone = (phone: string): ValidationResult => {
   if (!phone.trim()) {
-    return { isValid: false, error: "Phone number is required" };
+    return { isValid: false, error: i18n.t("validation.phoneRequired") };
   }
 
   const cleanPhone = phone.replace(/\D/g, "");
 
   if (cleanPhone.length < 10) {
-    return { isValid: false, error: "Phone number must be at least 10 digits" };
+    return { isValid: false, error: i18n.t("validation.phoneMinLength") };
   }
 
   return { isValid: true };
@@ -70,21 +72,24 @@ export const validatePhone = (phone: string): ValidationResult => {
 
 export const validatePasswordMatch = (
   password: string,
-  confirmPassword: string
+  confirmPassword: string,
 ): ValidationResult => {
   if (!confirmPassword) {
-    return { isValid: false, error: "Please confirm your password" };
+    return {
+      isValid: false,
+      error: i18n.t("validation.confirmPasswordRequired"),
+    };
   }
 
   if (password !== confirmPassword) {
-    return { isValid: false, error: "Passwords do not match" };
+    return { isValid: false, error: i18n.t("validation.passwordMismatch") };
   }
 
   return { isValid: true };
 };
 
 export const validateLoginForm = (
-  data: LoginFormData
+  data: LoginFormData,
 ): { isValid: boolean; errors: Record<keyof LoginFormData, string> } => {
   const errors: Record<keyof LoginFormData, string> = {
     email: "",
@@ -108,7 +113,7 @@ export const validateLoginForm = (
 };
 
 export const validateRegisterForm = (
-  data: RegisterFormData
+  data: RegisterFormData,
 ): { isValid: boolean; errors: Record<keyof RegisterFormData, string> } => {
   const errors: Record<keyof RegisterFormData, string> = {
     name: "",
@@ -140,7 +145,7 @@ export const validateRegisterForm = (
 
   const passwordMatchValidation = validatePasswordMatch(
     data.password,
-    data.confirmPassword
+    data.confirmPassword,
   );
   if (!passwordMatchValidation.isValid) {
     errors.confirmPassword = passwordMatchValidation.error || "";

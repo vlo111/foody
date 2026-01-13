@@ -1,0 +1,50 @@
+{
+  "auth": {
+    "login": "Մուտք",
+    "signUp": "Գրանցում",
+    "logout": "Ելք",
+    "forgotPassword": "Մոռացե՞լ եք գաղտնաբառը",
+    "alreadyMember": "Արդեն անդամ եք՞",
+    "or": "Կամ",
+    "loginWithGoogle": "Մուտք Google-ով",
+    "loginWithFacebook": "Մուտք Facebook-ով"
+  },
+  "form": {
+    "email": "Էլ. հասցե",
+    "password": "Գաղտնաբառ",
+    "confirmPassword": "Հաստատել գաղտնաբառը",
+    "fullName": "Անուն Ազգանուն",
+    "mobileNumber": "Հեռախոսահամար"
+  },
+  "validation": {
+    "emailRequired": "Էլ. հասցեն պարտադիր է",
+    "emailInvalid": "Էլ. հասցեն անվավեր է",
+    "passwordRequired": "Գաղտնաբառը պարտադիր է",
+    "passwordMinLength": "Գաղտնաբառը պետք է լինի առնվազն 6 նիշ",
+    "nameRequired": "Անունը պարտադիր է",
+    "nameMinLength": "Անունը պետք է լինի առնվազն 2 նիշ",
+    "phoneRequired": "Հեռախոսահամարը պարտադիր է",
+    "phoneMinLength": "Հեռախոսահամարը պետք է լինի առնվազն 10 թվանշան",
+    "confirmPasswordRequired": "Խնդրում ենք հաստատել գաղտնաբառը",
+    "passwordMismatch": "Գաղտնաբառերը չեն համընկնում"
+  },
+  "home": {
+    "welcome": "Բարի գալուստ, {{name}}!",
+    "loggedIn": "Դուք մուտք եք գործել"
+  },
+  "alerts": {
+    "logoutTitle": "Ելք",
+    "logoutMessage": "Վստա՞ հ եք",
+    "cancel": "Չեղարկել",
+    "loginFailed": "Մուտքը ձախողվեց",
+    "registrationFailed": "Գրանցումը ձախողվեց",
+    "tryAgain": "Փորձեք նորից",
+    "success": "Հաջողություն",
+    "accountCreated": "Հաշիվը հաջողությամբ ստեղծվեց!",
+    "ok": "Լավ",
+    "forgotPasswordTitle": "Մոռացել եմ գաղտնաբառը",
+    "forgotPasswordMessage": "Սպասեք, դա դեռ չի աշխատում",
+    "socialLoginSoon": "Սոցիալական մուտքը շուտով",
+    "socialSignupSoon": "Սոցիալական գրանցումը շուտով"
+  }
+}

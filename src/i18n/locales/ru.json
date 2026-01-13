@@ -1,0 +1,50 @@
+{
+  "auth": {
+    "login": "Вход",
+    "signUp": "Регистрация",
+    "logout": "Выход",
+    "forgotPassword": "Забыли пароль?",
+    "alreadyMember": "Уже есть аккаунт?",
+    "or": "Или",
+    "loginWithGoogle": "Войти через Google",
+    "loginWithFacebook": "Войти через Facebook"
+  },
+  "form": {
+    "email": "Электронная почта",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "fullName": "Полное имя",
+    "mobileNumber": "Номер телефона"
+  },
+  "validation": {
+    "emailRequired": "Электронная почта обязательна",
+    "emailInvalid": "Неверный формат электронной почты",
+    "passwordRequired": "Пароль обязателен",
+    "passwordMinLength": "Пароль должен содержать минимум 6 символов",
+    "nameRequired": "Имя обязательно",
+    "nameMinLength": "Имя должно содержать минимум 2 символа",
+    "phoneRequired": "Номер телефона обязателен",
+    "phoneMinLength": "Номер телефона должен содержать минимум 10 цифр",
+    "confirmPasswordRequired": "Пожалуйста, подтвердите пароль",
+    "passwordMismatch": "Пароли не совпадают"
+  },
+  "home": {
+    "welcome": "Добро пожаловать, {{name}}!",
+    "loggedIn": "Вы вошли в систему"
+  },
+  "alerts": {
+    "logoutTitle": "Выход",
+    "logoutMessage": "Вы уверены?",
+    "cancel": "Отмена",
+    "loginFailed": "Ошибка входа",
+    "registrationFailed": "Ошибка регистрации",
+    "tryAgain": "Пожалуйста, попробуйте снова",
+    "success": "Успешно",
+    "accountCreated": "Аккаунт успешно создан!",
+    "ok": "ОК",
+    "forgotPasswordTitle": "Забыли пароль",
+    "forgotPasswordMessage": "Подождите, это еще не работает",
+    "socialLoginSoon": "Вход через соцсети скоро будет доступен",
+    "socialSignupSoon": "Регистрация через соцсети скоро будет доступна"
+  }
+}

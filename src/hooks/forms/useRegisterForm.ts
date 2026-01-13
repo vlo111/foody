@@ -4,6 +4,7 @@ import { Alert } from "react-native";
 import { useAuth } from "@hooks/auth/useAuth";
 import { validateRegisterForm, RegisterFormData } from "@/utils/validation";
 import { ROUTES } from "@/constants/routes";
+import i18n from "@/i18n/config";
 
 const INITIAL_FORM_STATE: RegisterFormData = {
   name: "",
@@ -72,14 +73,17 @@ export const useRegisterForm = () => {
     });
 
     if (result.success) {
-      Alert.alert("Success", "Account created successfully!", [
+      Alert.alert(i18n.t("alerts.success"), i18n.t("alerts.accountCreated"), [
         {
-          text: "OK",
-          onPress: () => router.replace(ROUTES.HOME),
+          text: i18n.t("alerts.ok"),
+          onPress: () => router.replace(ROUTES.AUTH.LOGIN),
         },
       ]);
     } else {
-      Alert.alert("Registration Failed", result.error || "Please try again");
+      Alert.alert(
+        i18n.t("alerts.registrationFailed"),
+        result.error || i18n.t("alerts.tryAgain"),
+      );
     }
   };
 

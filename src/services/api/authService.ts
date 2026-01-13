@@ -35,7 +35,7 @@ const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const loginAPI = async (
   email: string,
-  password: string
+  password: string,
 ): Promise<ApiResponse<LoginResponse>> => {
   try {
     await delay(1000);
@@ -73,7 +73,7 @@ export const registerAPI = async (
   email: string,
   phone: string,
   password: string,
-  role: "customer" | "driver"
+  role: "customer" | "driver",
 ): Promise<ApiResponse<RegisterResponse>> => {
   try {
     await delay(1500);
@@ -123,7 +123,7 @@ export const logoutAPI = async (token: string): Promise<ApiResponse<null>> => {
 };
 
 export const verifyTokenAPI = async (
-  token: string
+  token: string,
 ): Promise<ApiResponse<LoginResponse>> => {
   try {
     await delay(500);

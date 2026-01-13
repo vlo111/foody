@@ -40,7 +40,7 @@ export const authLayoutStyles = StyleSheet.create({
   tab: {
     width: "50%",
     paddingVertical: spacing.sm,
-    paddingHorizontal: '15%',
+    paddingHorizontal: "15%",
   },
 
   tabText: {

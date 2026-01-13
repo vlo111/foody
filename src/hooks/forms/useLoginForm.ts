@@ -4,6 +4,7 @@ import { Alert } from "react-native";
 import { useAuth } from "@hooks/auth/useAuth";
 import { validateLoginForm, LoginFormData } from "@/utils/validation";
 import { ROUTES } from "@/constants/routes";
+import i18n from "@/i18n/config";
 
 const INITIAL_FORM_STATE: LoginFormData = {
   email: "",
@@ -55,7 +56,10 @@ export const useLoginForm = () => {
     if (result.success) {
       router.replace(ROUTES.HOME);
     } else {
-      Alert.alert("Login Failed", result.error || "Please try again");
+      Alert.alert(
+        i18n.t("alerts.loginFailed"),
+        result.error || i18n.t("alerts.tryAgain"),
+      );
     }
   };
 

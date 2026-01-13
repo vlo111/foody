@@ -16,10 +16,12 @@ import { Button } from "@/components/auth/Button";
 import { SocialButton } from "@/components/auth/SocialButton";
 import { Divider } from "@/components/auth/Divider";
 import { useLoginForm } from "@/hooks/forms/useLoginForm";
+import { useLocale } from "@/contexts/LocaleContext";
 
 const SOCIAL_PROVIDERS = ["facebook", "google"] as const;
 
 export default function LoginScreen() {
+  const { t } = useLocale();
   const {
     formData,
     errors,
@@ -31,11 +33,14 @@ export default function LoginScreen() {
   } = useLoginForm();
 
   const handleForgotPassword = () => {
-    Alert.alert("Forgot Password", "Wait, it still does not work");
+    Alert.alert(
+      t("alerts.forgotPasswordTitle"),
+      t("alerts.forgotPasswordMessage"),
+    );
   };
 
   const handleSocialLogin = (provider: string) => {
-    Alert.alert(`${provider} Login`, "Social login coming soon");
+    Alert.alert(`${provider} ${t("auth.login")}`, t("alerts.socialLoginSoon"));
   };
 
   return (
@@ -45,7 +50,7 @@ export default function LoginScreen() {
     >
       <View style={authLayoutStyles.formContainer}>
         <FormInput
-          placeholder="Email"
+          placeholder={t("form.email")}
           value={formData.email}
           onChangeText={(value) => updateField("email", value)}
           onBlur={() => markFieldTouched("email")}
@@ -56,7 +61,7 @@ export default function LoginScreen() {
         />
 
         <PasswordInput
-          placeholder="Password"
+          placeholder={t("form.password")}
           value={formData.password}
           onChangeText={(value) => updateField("password", value)}
           onBlur={() => markFieldTouched("password")}
@@ -68,13 +73,13 @@ export default function LoginScreen() {
           style={linkStyles.container}
           onPress={handleForgotPassword}
         >
-          <Text style={linkStyles.text}>Forgot password?</Text>
+          <Text style={linkStyles.text}>{t("auth.forgotPassword")}</Text>
         </TouchableOpacity>
 
         <View style={authScreenStyles.spacerMD} />
 
         <Button
-          title="Sign In"
+          title={t("auth.login")}
           onPress={handleSubmit}
           loading={isLoading}
           disabled={isLoading}

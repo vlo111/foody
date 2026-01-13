@@ -4,16 +4,18 @@ import { useRouter } from "expo-router";
 import { useAuth } from "@hooks/auth/useAuth";
 import { sharedStyles } from "@/styles/shared";
 import { ROUTES } from "@/constants/routes";
+import { useLocale } from "@/contexts/LocaleContext";
 
 export default function HomeScreen() {
   const router = useRouter();
   const { user, logout } = useAuth();
+  const { t } = useLocale();
 
   const handleLogout = () => {
-    Alert.alert("Logout", "Are you sure?", [
-      { text: "Cancel", style: "cancel" },
+    Alert.alert(t("alerts.logoutTitle"), t("alerts.logoutMessage"), [
+      { text: t("alerts.cancel"), style: "cancel" },
       {
-        text: "Logout",
+        text: t("auth.logout"),
         style: "destructive",
         onPress: async () => {
           await logout();
@@ -25,11 +27,13 @@ export default function HomeScreen() {
 
   return (
     <View style={sharedStyles.centerContainer}>
-      <Text style={sharedStyles.bodyText}>Welcome, {user?.name}!</Text>
-      <Text style={sharedStyles.successText}>You're logged in </Text>
+      <Text style={sharedStyles.bodyText}>
+        {t("home.welcome", { name: user?.name })}
+      </Text>
+      <Text style={sharedStyles.successText}>{t("home.loggedIn")}</Text>
 
       <TouchableOpacity onPress={handleLogout} style={sharedStyles.button}>
-        <Text style={sharedStyles.buttonText}>Logout</Text>
+        <Text style={sharedStyles.buttonText}>{t("auth.logout")}</Text>
       </TouchableOpacity>
     </View>
   );

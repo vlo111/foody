@@ -1,0 +1,50 @@
+{
+  "auth": {
+    "login": "Login",
+    "signUp": "Sign Up",
+    "logout": "Logout",
+    "forgotPassword": "Forgot password?",
+    "alreadyMember": "Already a member?",
+    "or": "Or",
+    "loginWithGoogle": "Log in with Google",
+    "loginWithFacebook": "Log in with Facebook"
+  },
+  "form": {
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "fullName": "Full Name",
+    "mobileNumber": "Mobile Number"
+  },
+  "validation": {
+    "emailRequired": "Email is required",
+    "emailInvalid": "Invalid email format",
+    "passwordRequired": "Password is required",
+    "passwordMinLength": "Password must be at least 6 characters",
+    "nameRequired": "Name is required",
+    "nameMinLength": "Name must be at least 2 characters",
+    "phoneRequired": "Phone number is required",
+    "phoneMinLength": "Phone number must be at least 10 digits",
+    "confirmPasswordRequired": "Please confirm your password",
+    "passwordMismatch": "Passwords do not match"
+  },
+  "home": {
+    "welcome": "Welcome, {{name}}!",
+    "loggedIn": "You're logged in"
+  },
+  "alerts": {
+    "logoutTitle": "Logout",
+    "logoutMessage": "Are you sure?",
+    "cancel": "Cancel",
+    "loginFailed": "Login Failed",
+    "registrationFailed": "Registration Failed",
+    "tryAgain": "Please try again",
+    "success": "Success",
+    "accountCreated": "Account created successfully!",
+    "ok": "OK",
+    "forgotPasswordTitle": "Forgot Password",
+    "forgotPasswordMessage": "Wait, it still does not work",
+    "socialLoginSoon": "Social login coming soon",
+    "socialSignupSoon": "Social signup coming soon"
+  }
+}

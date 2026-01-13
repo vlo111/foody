@@ -3,6 +3,7 @@ import { TouchableOpacity, Text, View } from "react-native";
 import { buttonStyles } from "@/styles/auth/components.styles";
 import GoogleIcon from "@/assets/icons/google-icon.svg";
 import { colors } from "@/styles/theme";
+import { useLocale } from "@/contexts/LocaleContext";
 
 type SocialProvider = "google" | "facebook";
 
@@ -11,26 +12,28 @@ interface SocialButtonProps {
   onPress: () => void;
 }
 
-const PROVIDER_CONFIG: Record<
-  SocialProvider,
-  { icon: React.ReactNode; text: string; isFacebook: boolean }
-> = {
-  google: {
-    icon: <GoogleIcon />,
-    text: "Log in with Google",
-    isFacebook: false,
-  },
-  facebook: {
-    icon: "f",
-    text: "Log in with Facebook",
-    isFacebook: true,
-  },
-};
-
 export const SocialButton: React.FC<SocialButtonProps> = ({
   provider,
   onPress,
 }) => {
+  const { t } = useLocale();
+
+  const PROVIDER_CONFIG: Record<
+    SocialProvider,
+    { icon: React.ReactNode; text: string; isFacebook: boolean }
+  > = {
+    google: {
+      icon: <GoogleIcon />,
+      text: t("auth.loginWithGoogle"),
+      isFacebook: false,
+    },
+    facebook: {
+      icon: "f",
+      text: t("auth.loginWithFacebook"),
+      isFacebook: true,
+    },
+  };
+
   const { icon, text, isFacebook } = PROVIDER_CONFIG[provider];
 
   return (
@@ -41,7 +44,9 @@ export const SocialButton: React.FC<SocialButtonProps> = ({
     >
       {isFacebook ? (
         <View style={buttonStyles.socialIconContainer}>
-          <Text style={{ fontSize: 20, color: colors.white, fontWeight: "bold" }}>
+          <Text
+            style={{ fontSize: 20, color: colors.white, fontWeight: "bold" }}
+          >
             {icon}
           </Text>
         </View>

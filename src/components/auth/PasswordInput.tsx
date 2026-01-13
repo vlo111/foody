@@ -22,7 +22,7 @@ export const PasswordInput: React.FC<PasswordInputProps> = ({
       rightIcon={
         <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
           <Text style={{ fontSize: 20 }}>
-            {isVisible ? <EyeIconClose /> : <EyeIconOpen />}+
+            {isVisible ? <EyeIconClose /> : <EyeIconOpen />}
           </Text>
         </TouchableOpacity>
       }

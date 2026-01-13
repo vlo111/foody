@@ -16,18 +16,20 @@ import { FormInput } from "@/components/auth/FormInput";
 import { PasswordInput } from "@/components/auth/PasswordInput";
 import { Button } from "@/components/auth/Button";
 import { useRegisterForm } from "@hooks/forms/useRegisterForm";
+import { useLocale } from "@/contexts/LocaleContext";
 
 const SOCIAL_PROVIDERS = [
-  { name: "google", icon: "🔴", style: { fontSize: 20 } },
+  { name: "google", icon: "G", style: { fontSize: 20 } },
   {
     name: "facebook",
     icon: "f",
-    style: { fontSize: 20, color: "#3b5998", fontWeight: "bold" },
+    style: { fontSize: 20, color: "#3b5998", fontWeight: "bold" as const },
   },
 ] as const;
 
-export default function RegisterScreen() {
+function RegisterScreen() {
   const router = useRouter();
+  const { t } = useLocale();
   const {
     formData,
     errors,
@@ -39,7 +41,10 @@ export default function RegisterScreen() {
   } = useRegisterForm();
 
   const handleSocialSignup = (provider: string) => {
-    Alert.alert(`${provider} Sign Up`, "Social signup coming soon");
+    Alert.alert(
+      `${provider} ${t("auth.signUp")}`,
+      t("alerts.socialSignupSoon"),
+    );
   };
 
   return (
@@ -54,7 +59,9 @@ export default function RegisterScreen() {
       >
         <View style={authLayoutStyles.formContainer}>
           <View style={authScreenStyles.registerHeader}>
-            <Text style={authScreenStyles.registerTitle}>Sign Up</Text>
+            <Text style={authScreenStyles.registerTitle}>
+              {t("auth.signUp")}
+            </Text>
 
             <View style={authScreenStyles.socialIconsRow}>
               {SOCIAL_PROVIDERS.map(({ name, icon, style }) => (
@@ -70,7 +77,7 @@ export default function RegisterScreen() {
           </View>
 
           <FormInput
-            placeholder="Full Name"
+            placeholder={t("form.fullName")}
             value={formData.name}
             onChangeText={(value) => updateField("name", value)}
             onBlur={() => markFieldTouched("name")}
@@ -79,7 +86,7 @@ export default function RegisterScreen() {
           />
 
           <FormInput
-            placeholder="Email"
+            placeholder={t("form.email")}
             value={formData.email}
             onChangeText={(value) => updateField("email", value)}
             onBlur={() => markFieldTouched("email")}
@@ -90,7 +97,7 @@ export default function RegisterScreen() {
           />
 
           <FormInput
-            placeholder="Mobile Number"
+            placeholder={t("form.mobileNumber")}
             value={formData.phone}
             onChangeText={(value) => updateField("phone", value)}
             onBlur={() => markFieldTouched("phone")}
@@ -100,7 +107,7 @@ export default function RegisterScreen() {
           />
 
           <PasswordInput
-            placeholder="Password"
+            placeholder={t("form.password")}
             value={formData.password}
             onChangeText={(value) => updateField("password", value)}
             onBlur={() => markFieldTouched("password")}
@@ -109,7 +116,7 @@ export default function RegisterScreen() {
           />
 
           <PasswordInput
-            placeholder="Confirm Password"
+            placeholder={t("form.confirmPassword")}
             value={formData.confirmPassword}
             onChangeText={(value) => updateField("confirmPassword", value)}
             onBlur={() => markFieldTouched("confirmPassword")}
@@ -122,7 +129,7 @@ export default function RegisterScreen() {
           <View style={authScreenStyles.footerRow}>
             <View style={authScreenStyles.footerButtonContainer}>
               <Button
-                title="Sign Up"
+                title={t("auth.signUp")}
                 onPress={handleSubmit}
                 loading={isLoading}
                 disabled={isLoading}
@@ -132,8 +139,10 @@ export default function RegisterScreen() {
             <View style={authScreenStyles.footerTextContainer}>
               <TouchableOpacity onPress={() => router.push("/(auth)/login")}>
                 <Text style={authScreenStyles.footerText}>
-                  Already a member?{" "}
-                  <Text style={authScreenStyles.footerLink}>Login</Text>
+                  {t("auth.alreadyMember")}{" "}
+                  <Text style={authScreenStyles.footerLink}>
+                    {t("auth.login")}
+                  </Text>
                 </Text>
               </TouchableOpacity>
             </View>
@@ -143,3 +152,5 @@ export default function RegisterScreen() {
     </KeyboardAvoidingView>
   );
 }
+
+export default RegisterScreen;
